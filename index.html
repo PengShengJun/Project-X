@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-UNIVERSE STATION Poster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bc13fe;
+            --neon-red: #ff003c;
+            --neon-yellow: #ffee00;
+            --neon-blue: #0044ff;
+            --bg-deep: #050214;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Noto Sans TC', sans-serif;
+            padding: 20px;
+        }
+
+        /* --- 海報容器 (9:16 比例) --- */
+        .poster {
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 9/16;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            border: 1px solid #333;
+            box-shadow: 0 0 80px rgba(0, 243, 255, 0.15);
+            
+            /* 背景魔法：深邃星雲漸層 */
+            background: 
+                radial-gradient(circle at 50% 20%, rgba(188, 19, 254, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(0, 68, 255, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 0% 50%, rgba(255, 0, 60, 0.1) 0%, transparent 40%),
+                linear-gradient(180deg, #0a0a12 0%, #020205 100%);
+        }
+
+        /* 裝飾線條 */
+        .deco-line-top {
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+            box-shadow: 0 0 15px var(--neon-cyan);
+        }
+
+        /* --- 1. 頂部標題 --- */
+        header { padding: 30px 20px 10px; z-index: 2; }
+        
+        .title-en {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+        
+        .title-cn {
+            font-size: 0.9rem;
+            color: var(--neon-cyan);
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-top: 5px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            margin-top: 10px;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.5rem;
+            padding: 3px 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            background: rgba(0,0,0,0.3);
+            color: #aaa;
+        }
+        .blink { color: #0f0; animation: blink 1s infinite; }
+
+        /* --- 2. 核心 LOGO (故障藝術版 Glitch Effect) --- */
+        .logo-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-height: 140px;
+        }
+        
+        .glitch-x {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 7rem;
+            font-weight: 900;
+            color: white;
+            position: relative;
+            /* 基礎發光 */
+            text-shadow: 
+                3px 3px 0 var(--neon-purple),
+                -3px -3px 0 var(--neon-cyan);
+            animation: glitch-skew 3s infinite linear alternate-reverse;
+        }
+
+        /* 故障偽元素 */
+        .glitch-x::before, .glitch-x::after {
+            content: "X";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .glitch-x::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--neon-red);
+            clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+            animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+        }
+        
+        .glitch-x::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--neon-blue);
+            clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        /* --- 3. Slogan & 特色 --- */
+        .content-section {
+            padding: 0 20px;
+            z-index: 2;
+        }
+
+        .hook {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #fff, #888, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+        
+        .sub-hook {
+            font-size: 0.6rem;
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .feat-item { font-size: 0.5rem; color: #aaa; flex: 1; }
+        .feat-item b { display: block; font-size: 0.7rem; color: white; margin-bottom: 3px; }
+
+        /* --- 4. 星球陣營 (小圖示版) --- */
+        .planets-container {
+            padding: 0 15px;
+            margin-bottom: 20px;
+        }
+        
+        .section-label {
+            font-family: 'Orbitron';
+            font-size: 0.7rem;
+            color: var(--neon-cyan);
+            margin-bottom: 10px;
+            text-align: left;
+            border-left: 3px solid var(--neon-cyan);
+            padding-left: 8px;
+        }
+
+        .planet-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .planet-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .planet-card::after {
+            content: ''; position: absolute; top:0; left:0; width: 3px; height: 100%;
+        }
+
+        /* 各星球配色與圖示 */
+        .p-ares { box-shadow: inset 0 0 10px rgba(255, 0, 60, 0.1); }
+        .p-ares::after { background: var(--neon-red); }
+        .icon-box.red { border-color: var(--neon-red); box-shadow: 0 0 5px var(--neon-red); }
+
+        .p-neon { box-shadow: inset 0 0 10px rgba(188, 19, 254, 0.1); }
+        .p-neon::after { background: var(--neon-purple); }
+        .icon-box.purple { border-color: var(--neon-purple); box-shadow: 0 0 5px var(--neon-purple); }
+
+        .p-lux { box-shadow: inset 0 0 10px rgba(255, 238, 0, 0.1); }
+        .p-lux::after { background: var(--neon-yellow); }
+        .icon-box.yellow { border-color: var(--neon-yellow); box-shadow: 0 0 5px var(--neon-yellow); }
+
+        .p-void { box-shadow: inset 0 0 10px rgba(0, 68, 255, 0.1); }
+        .p-void::after { background: var(--neon-blue); }
+        .icon-box.blue { border-color: var(--neon-blue); box-shadow: 0 0 5px var(--neon-blue); }
+
+        .icon-box {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            border: 2px solid #555;
+            margin-right: 8px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 14px;
+            background: #000;
+        }
+
+        .p-info h4 { font-size: 0.75rem; color: white; margin-bottom: 2px; }
+        .p-info span { font-size: 0.45rem; color: #888; display: block; line-height: 1.2; }
+
+        /* --- 5. 底部 CTA 與 QR Code --- */
+        .footer {
+            margin-top: auto;
+            background: linear-gradient(0deg, rgba(0, 243, 255, 0.1) 0%, transparent 100%);
+            padding: 20px;
+            position: relative;
+        }
+        
+        .qr-box {
+            width: 100px; height: 100px;
+            background: white;
+            margin: 0 auto 10px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 5px;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+            border-radius: 4px;
+        }
+        
+        .qr-box img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .cta-text { font-size: 0.8rem; font-weight: 700; color: white; margin-bottom: 5px; }
+        .warning { font-size: 0.45rem; color: var(--neon-red); opacity: 0.8; }
+
+        /* 動畫 */
+        @keyframes blink { 50% { opacity: 0; } }
+        
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            20% { transform: skew(1deg); }
+            40% { transform: skew(-1deg); }
+            60% { transform: skew(2deg); }
+            80% { transform: skew(-2deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px,0); }
+            20% { clip-path: inset(60% 0 10% 0); transform: translate(2px,0); }
+            40% { clip-path: inset(40% 0 50% 0); transform: translate(-2px,0); }
+            60% { clip-path: inset(80% 0 5% 0); transform: translate(2px,0); }
+            80% { clip-path: inset(10% 0 70% 0); transform: translate(-2px,0); }
+            100% { clip-path: inset(30% 0 50% 0); transform: translate(2px,0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(10% 0 60% 0); transform: translate(2px,0); }
+            20% { clip-path: inset(30% 0 20% 0); transform: translate(-2px,0); }
+            40% { clip-path: inset(70% 0 10% 0); transform: translate(2px,0); }
+            60% { clip-path: inset(20% 0 50% 0); transform: translate(-2px,0); }
+            80% { clip-path: inset(50% 0 30% 0); transform: translate(2px,0); }
+            100% { clip-path: inset(0% 0 80% 0); transform: translate(-2px,0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="poster">
+        <div class="deco-line-top"></div>
+        
+        <!-- Header -->
+        <header>
+            <div class="title-en">X-UNIVERSE STATION</div>
+            <div class="title-cn">艾克斯宇宙探索站</div>
+            <div class="status-badge"><span class="blink">●</span> SYSTEM ONLINE</div>
+        </header>
+
+        <!-- Logo (故障版) -->
+        <div class="logo-section">
+            <div class="glitch-x">X</div>
+        </div>
+
+        <!-- Content -->
+        <div class="content-section">
+            <div class="hook">「解開你的未知數，連結無限可能」</div>
+            <div class="sub-hook">致 地球上的流浪訊號：這不只是一個聊天室，<br>這是一場 <span style="color:var(--neon-cyan)">文字版的大型多人線上 RPG</span>。</div>
+
+            <div class="features">
+                <div class="feat-item"><b>⚡ 聊天挖礦</b>累積活躍賺能源</div>
+                <div class="feat-item"><b>💎 黑市交易</b>積分購買特權</div>
+                <div class="feat-item"><b>🏆 階級晉升</b>從漂流者變統治者</div>
+            </div>
+        </div>
+
+        <!-- Planets -->
+        <div class="planets-container">
+            <div class="section-label">CHOOSE YOUR FACTION / 登陸星球</div>
+            <div class="planet-grid">
+                <!-- 戰神星 -->
+                <div class="planet-card p-ares">
+                    <div class="icon-box red">⚔️</div>
+                    <div class="p-info">
+                        <h4>戰神星 ARES</h4>
+                        <span>競技・榮耀<br>傳說對決 / 找隊友</span>
+                    </div>
+                </div>
+                <!-- 霓虹星 -->
+                <div class="planet-card p-neon">
+                    <div class="icon-box purple">👾</div>
+                    <div class="p-info">
+                        <h4>霓虹星 NEON</h4>
+                        <span>混沌・娛樂<br>迷因梗圖 / 動漫</span>
+                    </div>
+                </div>
+                <!-- 光子星 -->
+                <div class="planet-card p-lux">
+                    <div class="icon-box yellow">☀️</div>
+                    <div class="p-info">
+                        <h4>光子星 LUX</h4>
+                        <span>連結・生活<br>日常閒聊 / 美食</span>
+                    </div>
+                </div>
+                <!-- 深淵星 -->
+                <div class="planet-card p-void">
+                    <div class="icon-box blue">🌊</div>
+                    <div class="p-info">
+                        <h4>深淵星 VOID</h4>
+                        <span>深層・寧靜<br>心事樹洞 / Emo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer with QR Code -->
+        <div class="footer">
+            <div class="cta-text">🚀 立即掃描，領取太空簽證</div>
+            <!-- 真實 QR Code 圖片 -->
+            <div class="qr-box">
+                <a href="https://line.me/ti/g2/8leEjnClaf5SpNvO4dO4ThGOcV5j8C3fu09dcQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://line.me/ti/g2/8leEjnClaf5SpNvO4dO4ThGOcV5j8C3fu09dcQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" alt="Join X-Universe">
+                </a>
+            </div>
+            <div class="warning">⚠️ 警告：入站後請務必修改暱稱並選擇陣營，否則將視為幽靈訊號清除。</div>
+        </div>
+    </div>
+
+</body>
+</html>
