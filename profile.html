@@ -116,16 +116,32 @@
                                         <span className="text-xs text-yellow-100 font-bold tracking-wider">CAPTAIN ON BRIDGE</span>
                                     </div>
 
-                                    {/* 頭像區域 */}
+                                    {/* 頭像區域 - 優化版 */}
                                     <div className="relative mb-6 group-hover:scale-105 transition-transform duration-300">
-                                        <div className="w-32 h-32 rounded-full p-1 bg-gradient-to-br from-yellow-400 to-red-600 shadow-[0_0_15px_rgba(234,179,8,0.5)]">
-                                            <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden relative">
-                                                <User size={48} className="text-slate-400" />
-                                                <span className="absolute text-5xl opacity-80">🦁</span>
+                                        
+                                        {/* 動態光環背景 */}
+                                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-600 blur opacity-75 animate-pulse"></div>
+                                        
+                                        {/* 主頭像容器 */}
+                                        <div className="relative w-32 h-32 rounded-full p-[3px] bg-gradient-to-br from-yellow-300 via-orange-500 to-purple-600">
+                                            <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden relative shadow-inner">
+                                                
+                                                {/* 背景裝飾：網格線 */}
+                                                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+                                                
+                                                {/* 獅子本體 */}
+                                                <span className="text-6xl filter drop-shadow-[0_0_15px_rgba(234,179,8,0.5)] z-10 hover:scale-110 transition-transform duration-300 cursor-default">
+                                                    🦁
+                                                </span>
+
+                                                {/* 前景反光特效 */}
+                                                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                                             </div>
                                         </div>
-                                        <div className="absolute -bottom-2 -right-2 bg-slate-900 p-2 rounded-full border border-yellow-600">
-                                            <Crown size={20} className="text-yellow-400 fill-yellow-400" />
+
+                                        {/* 皇冠徽章 */}
+                                        <div className="absolute -bottom-1 -right-1 bg-slate-900 p-2 rounded-full border border-yellow-500/50 shadow-lg z-20">
+                                            <Crown size={18} className="text-yellow-400 fill-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]" />
                                         </div>
                                     </div>
 
@@ -218,10 +234,20 @@
                                         </a>
                                     </div>
 
-                                    {/* Quote */}
-                                    <div className="mt-4 italic text-slate-500 text-[10px] text-center">
-                                        ❝ Keep your feet on the ground and your eyes on the stars. ❞
+                                    {/* Quote - 優化版：終端機風格 */}
+                                    <div className="mt-4 w-full">
+                                        <div className="relative bg-slate-950/50 rounded p-2 border border-slate-700/50 group hover:border-yellow-500/50 transition-colors">
+                                            {/* 左側黃色裝飾線 */}
+                                            <div className="absolute top-0 left-0 w-[2px] h-full bg-yellow-500/50"></div>
+                                            
+                                            <p className="font-mono text-[10px] text-yellow-100/80 text-center tracking-wide">
+                                                <span className="text-yellow-500 opacity-50 mr-1">&gt;</span>
+                                                Keep your feet on the ground and your eyes on the stars.
+                                                <span className="inline-block w-1.5 h-3 bg-yellow-500 ml-1 animate-pulse align-middle"></span>
+                                            </p>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
 
